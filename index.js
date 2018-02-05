@@ -1,13 +1,15 @@
 // ------------------------------------- PART A: INITILIZING THE VARIABLES ---------------------------------------------
 
 var express = require('express');
+
 var MongoClient = require('mongodb').MongoClient;
-var assert = require('assert');
+
 var bodyParser = require('body-parser');
+
 var ObjectID = require('mongodb').ObjectID;
 
 // Connection URL
-//var url = 'mongodb://udit:rangrezz@ds117178.mlab.com:17178/tododb';
+var url = 'mongodb://udit:rangrezz@ds117178.mlab.com:17178/tododb';
 
 // Database Name
 var dbName = 'tododb';
@@ -28,7 +30,7 @@ MongoClient.connect(url, function(err, client) {
     // client.close();
 });
 
-// ---------------------------- PART C: CREATING EXPRESS INSTANCE AND SERVING HOME.HTML -------------------------------
+// ------------------ PART C: CREATING EXPRESS INSTANCE AND SERVING HOME.HTML -------------------------------
 
 var app = express();
 app.use(bodyParser.json()); // support json encoded bodies
@@ -42,7 +44,7 @@ app.get('/', function(req, res, next) {
     });
 });
 
-// ----------------------------------------- PART D: CRUD OPERATION ROUTES --------------------------------------------
+// ---------------------------------- PART D: CRUD OPERATION ROUTES --------------------------------------------
 
 app.get('/getEntries', function(req, res, next) {
     //console.log('request received');
@@ -61,15 +63,15 @@ app.get('/getEntries', function(req, res, next) {
     // Find some vortex
     collection.find({}).toArray(function(err, docs) {
         // assert.equal(err, null);	// --> checks for two equal values, else throws error
-        console.log("Found the following records");
-        console.log(docs);
+        //console.log("Found the following records");
+        //console.log(docs);
         callback(docs);
     });
 
 });
 
 app.post('/create', function(req, res, next) {
-    console.log(req.body);
+    //console.log(req.body);
 
     function callback(err) {
         if (err) {

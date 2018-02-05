@@ -27,6 +27,9 @@ event.preventDefault();
 this.parentNode.style.display= 'none';
 createBtn.style.display = "none";
 updateBtn.style.display = "block";
+
+//to send the id with update btn click , we are binding it once a todo-update is clicked
+updateBtn.setAttribute("data-todoid",this.parentNode.getAttribute('data-todoid'));
 item.value = this.previousSibling.innerHTML;
 item.focus();
 document.getElementById('priorityValue').value = this.parentNode.getAttribute('data-priority');
@@ -97,8 +100,11 @@ window.onload = function(){
 	updateBtn.addEventListener('click',function(e){
 		e.preventDefault();
 		var priority = document.querySelector("#priorityValue option:checked");
+		//id of the item is already bound to the update btn .
+		var todoid = this.getAttribute('data-todoid');
+		//var req_ob = {"id" : todoid};
 		if(item.value !='' && priority.value !=''){
-		 	var req_ob = {"text" : item.value,"priority":priority.value};
+		 	var req_ob = {"id" : todoid ,"text" : item.value,"priority":priority.value};
 		 	makeAjaxRequest("POST",(window.location.href).toString()+'update',updatePage,JSON.stringify(req_ob));
 		 }
 	});
